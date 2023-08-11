@@ -1,156 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Tab 标签</title>
+  <head>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #40774a;
-        }
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
 
-        .tabs {
-            width: 400px;
-            margin: 34px auto;
-            background-color: #FFF;
-            border: 1px solid #C0DCC0;
-            box-sizing: border-box;
-        }
+      body {
+        font-size: 14px;
+        font-family: "Microsoft YaHei", "SimSun";
+        height: 8888px;
+      }
 
-        .tabs nav {
-            height: 40px;
-            text-align: center;
-            line-height: 40px;
-            overflow: hidden;
-            background-color: #C0DCC0;
-            display: flex;
-        }
+      .header {
+        height: 58px;
+        background-color: #191d3a;
+      }
 
-        nav a {
-            display: block;
-            width: 100px;
-            border-right: 1px solid #FFF;
-            color: #000;
-            text-decoration: none;
-        }
+      .inner_c {
+        width: 1000px;
+        margin: 0 auto;
+      }
 
-        nav a:last-child {
-            border-right: 0 none;
-        }
+      /*导航条的logo*/
+      .header .logo {
+        float: left;
+        margin-right: 40px;
+      }
 
-        nav a.active {
-            background-color: #9BAF9B;
-        }
+      .header .nav {
+        float: left;
+      }
 
-        .cont {
-            overflow: hidden;
-            display: none;
-        }
+      .header .nav ul {
+        list-style: none;
+        /*去掉列表前面的圆点*/
+      }
 
-        .cont ol {
-            line-height: 30px;
-        }
+      .header .nav ul li {
+        float: left;
+        width: 100px;
+        line-height: 58px;
+        /*让行高等于这一行的高度，保证里面的文字垂直居中*/
+        border-left: 1px solid #252947;
+        /*每个li之间有间隔线*/
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <div class="tabs">
-        <nav>
-            <a href="javascript:;" data-cont="local">国内新闻</a>
-            <a href="javascript:;" data-cont="global">国际新闻</a>
-            <a href="javascript:;" data-cont="sports">体育新闻</a>
-            <a href="javascript:;" data-cont="funny">娱乐新闻</a>
-        </nav>
-        <section class="cont" id="local">
-            <ol>
-                <li>国内新闻1</li>
-                <li>国内新闻2</li>
-                <li>国内新闻3</li>
-                <li>国内新闻4</li>
-                <li>国内新闻5</li>
-                <li>国内新闻6</li>
-                <li>国内新闻7</li>
-            </ol>
-        </section>
-        <section class="cont" id="global">
-            <ol>
-                <li>国内新闻1</li>
-                <li>国际新闻2</li>
-                <li>国际新闻3</li>
-                <li>国际新闻4</li>
-                <li>国际新闻5</li>
-                <li>国际新闻6</li>
-            </ol>
-        </section>
-        <section class="cont" id="sports">
-            <ol>
-                <li>体育新闻1</li>
-                <li>体育新闻2</li>
-                <li>体育新闻3</li>
-                <li>体育新闻4</li>
-                <li>体育新闻5</li>
-                <li>体育新闻6</li>
-                <li>体育新闻7</li>
-            </ol>
-        </section>
-        <section class="cont" id="funny">
-            <ol>
-                <li>娱乐新闻1</li>
-                <li>娱乐新闻2</li>
-                <li>娱乐新闻3</li>
-                <li>娱乐新闻4</li>
-                <li>娱乐新闻5</li>
-                <li>娱乐新闻6</li>
-                <li>娱乐新闻7</li>
-            </ol>
-        </section>
+  <body>
+    <div class="header">
+      <div class="inner_c">
+        <div class="logo">
+          <img src="images/logo.png" alt="logo">
+        </div>
+        <div class="nav">
+          <ul>
+            <li><a href="#" class="current">首页</a></li>
+            <li><a href="#">博雅游戏</a></li>
+            <li><a href="#">博雅新闻</a></li>
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#">客服中心</a></li>
+            <li class="last"><a href="#">投资者关系</a></li>
+          </ul>
+        </div>
+        <div class="joinus_box">
+          <div class="join_us">
+            <a href="https://www.google.com/" target="_blank">加入我们</a>
+          </div>
+        </div>
+
+      </div>
     </div>
-    <script>
-        // 目标： 默认显示一个 当前的样式
-        // 点击导航，实现切换
-        // key 表示的当前显示的是第几个
-
-        (function (key) {
-            // 获取所有的导航
-            var navs = document.querySelectorAll('nav a');
-            // 遍历 给导航 绑定事件，并且添加当前样式
-            for (var i = 0; i < navs.length; i++) {
-                // 如果是用户指定的当前样式
-                if (key == i) {
-                    navs[i].classList.add('active');
-                    // 拿到要显示内容section的id
-                    var secId = navs[i].dataset['cont'];
-                    // 获取对应的section标签
-                    document.querySelector('#' + secId).style.display = 'block';
-                }
-
-                // 给每一个导航绑定点击事件
-                navs[i].onclick = function () {
-                    // 排他
-                    // 之前有active样式的清除, 之前显示的section 隐藏
-                    var currentNav = document.querySelector('.active');
-                    // 获取对应的内容区域 ，让其隐藏
-                    var currentId = currentNav.dataset['cont'];
-                    // 去掉导航的active 样式
-                    currentNav.classList.remove('active');
-                    // 对应的内容区域
-                    document.querySelector('#' + currentId).style.display = 'none';
-
-                    // 突出显示自己 导航添加样式  对应的section 显示
-                    // 给自己添加active样式
-                    this.classList.add('active');
-                    // 对应的section模块显示出来
-                    var myId = this.dataset['cont'];
-                    document.querySelector('#' + myId).style.display = 'block';
-                }
-            }
-
-        })(0);
-
-
-    </script>
-</body>
+  </body>
+  </head>
 
 </html>
